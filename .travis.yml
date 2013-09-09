@@ -1,4 +1,3 @@
----
 language: ruby
 branches:
   only:
@@ -16,4 +15,5 @@ after_script:
 - rake deploy
 env:
   global:
-    secure: L9kdgJH7QhRJ02q0I4zJlHEAY7KjKXvazJuqURbxfvptcnafokcwOuak7sCP+PtIUi9aV9ZmdmxoIp7XD1ZOz/7GdtZWSf1xRsFClehCPUU2sh8ZlbN95t+S4r9sP22bL9hyjye4G6Z7FqTS2d3hr+ySdkGXcCH4pdvqEwQkTdg=
+  - GH_REPO="XuefengWu.github.io"
+  - secure: b86vDRs85s/NlPGkfEvCj9s6KY0H+q+iFo1nlwkC8pV4ABNOpOs5HXFkOx+/p1mz0vDH9m7R0lu+jHGRUWZ+wHXJRdDVwLU53v1YMC5ktrfajf3vABW01LHTK3Xz5ToEPzHtGqwKZK7uGhY0sON3hY+4KXUiHgFPoIvONRgOV5w=
