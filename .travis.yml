@@ -15,5 +15,5 @@ after_script:
 - rake deploy
 env:
   global:
-  - GH_REPO="XuefengWu.github.io"
+  - GH_REPO="XuefengWu/XuefengWu.github.io"
   - secure: b86vDRs85s/NlPGkfEvCj9s6KY0H+q+iFo1nlwkC8pV4ABNOpOs5HXFkOx+/p1mz0vDH9m7R0lu+jHGRUWZ+wHXJRdDVwLU53v1YMC5ktrfajf3vABW01LHTK3Xz5ToEPzHtGqwKZK7uGhY0sON3hY+4KXUiHgFPoIvONRgOV5w=
