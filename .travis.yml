@@ -1,4 +1,3 @@
----
 language: ruby
 branches:
   only:
@@ -17,4 +16,4 @@ after_script:
 env:
   global:
   - GH_REPO="XuefengWu/XuefengWu.github.io"
-  - secure: b86vDRs85s/NlPGkfEvCj9s6KY0H+q+iFo1nlwkC8pV4ABNOpOs5HXFkOx+/p1mz0vDH9m7R0lu+jHGRUWZ+wHXJRdDVwLU53v1YMC5ktrfajf3vABW01LHTK3Xz5ToEPzHtGqwKZK7uGhY0sON3hY+4KXUiHgFPoIvONRgOV5w=
+  - secure: PSZcQaq3ZPYV7PFUMAkjEqFS/Q4EUOiaisFwG0zMI+hIlX2okKeLqHdlVYLgX7/d3fTQ8zYf9L1CseOewB4JLi6yUzejnGR2hYNMmisPkVju3PRN16ZtL2Mbh7RhBa9K6iNl/t5JP/vahriwI+2+r1s4277A9dXGfUjou88VzHQ=
