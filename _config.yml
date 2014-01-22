@@ -90,11 +90,11 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:xuefengblog
+disqus_short_name:	xuefengblog
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:UA-8201082-6
+google_analytics_tracking_id:	UA-8201082-6
 
 # Facebook Like
 facebook_like: false
