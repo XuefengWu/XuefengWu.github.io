@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: web | To see a world in a grain of sand]]></title>
+  <link href="http://XuefengWu.github.io/blog/categories/web/atom.xml" rel="self"/>
+  <link href="http://XuefengWu.github.io/"/>
+  <updated>2014-01-22T16:35:53+08:00</updated>
+  <id>http://XuefengWu.github.io/</id>
+  <author>
+    <name><![CDATA[Xuefeng Wu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Web Stream Programming]]></title>
+    <link href="http://XuefengWu.github.io/blog/2014/01/22/web-stream-programming/"/>
+    <updated>2014-01-22T13:15:00+08:00</updated>
+    <id>http://XuefengWu.github.io/blog/2014/01/22/web-stream-programming</id>
+    <content type="html"><![CDATA[<h1>Stream Programming</h1>
+
+<p>The world with time is continuative, but right now we programming in a static world with status. How to process events in realtime, or file to large for a server? Currently, we can use hadoop to process large file or storm to process stream files by distribution. But not all things ask process all data in a time, but ask process data in time.</p>
+
+<p>So, we need use Stream programming, take data as stream, but not static object. <a href="http://www.playframework.com/documentation/2.1.1/Iteratees">Play! framework Enumerator/Iteratee</a> which learn from <a href="http://www.haskell.org/haskellwiki/Iteratee_I/O">haskell Iteratee pattern</a> make it possible.</p>
+
+<p>The stream process like this:
+continuative input(events, big data) &ndash;> stream process (programming) &ndash;> realtime display</p>
+
+<p>Let&rsquo;s image there are continuative input from outside, we use realtime heap usage for demo.
+And display the realtime usage in page.</p>
+
+<p><img src="https://www.evernote.com/shard/s17/sh/e42508d5-307c-4a7f-9037-bbfd612c64a3/0b7bd7aa3fcc4afa7cad47fbcf201c4f/deep/0/web-stream-programming.png" alt="monitor" /></p>
+
+<h3>Continuative input</h3>
+
+<p>Simulate continuative input: heap usage</p>
+
+<p><code>Enumerators</code> would product data, and play! provide some help to generate Enumerator from data source, such as <code>generateM</code> and <code>fromCallback1</code> .</p>
+
+<p>``` scala
+  val getHeap = Enumerator.generateM {</p>
+
+<pre><code>Promise.timeout(
+  Some(Runtime.getRuntime().freeMemory() * 100 / Runtime.getRuntime().totalMemory()).map(_.toString),
+  1000, TimeUnit.MILLISECONDS)
+</code></pre>
+
+<p>  }
+```</p>
+
+<h3>Stream process:</h3>
+
+<p>A <code>Enumerator</code> can compose another <code>Enumerator</code> to deal with the stream, here we compose stream to generate Http EventSource message.</p>
+
+<p>``` scala
+  def memory =  Action {</p>
+
+<pre><code>Ok.chunked(Streams.getHeap &amp;&gt; EventSource()).as(EVENT_STREAM)
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>That&rsquo;s all we need to do in backend by play!</p>
+
+<p>remeber add a url for this api in routes
+<code>
+GET     /memory                     controllers.Application.memory
+</code></p>
+
+<h3>Realtime display</h3>
+
+<p>There is <a href="https://gist.github.com/1499279/d0a29913f447537feadbadc71f2827c6b103938a">a nice google style gauges using d3.js</a>, import it, and use EventSource to recieve http chunk.</p>
+
+<p>We just create a memory gauge, and listen on EventSource <code>onmessage</code> event</p>
+
+<p>``` javascript
+var memoryGauge = createGauge(&ldquo;memory&rdquo;, &ldquo;Memory&rdquo;);
+var memory = new EventSource(&ldquo;/memory&rdquo;);</p>
+
+<pre><code>        memory.onmessage = function(msg) {
+            var data = msg.data.replace("'","").replace("'","");
+            memoryGauge.redraw(Math.floor(data));
+        };
+</code></pre>
+
+<p>```</p>
+
+<p>That&rsquo;s all we need to do stream programming by Play! Framework with Http5 EventSource, and D3</p>
+
+<p>The whole demo code is <a href="https://github.com/XuefengWu/web-stream-programming">here</a></p>
+
+<h2>Keep going</h2>
+
+<ol>
+<li>I think play! <a href="http://www.playframework.com/documentation/2.1.1/Iteratees">Enumerator/Iteratee</a> is good and make things possible. If want do more stream programming, need introduce <a href="https://github.com/Netflix/RxJava">Rx framework</a> .</li>
+<li>There is <a href="facebook.github.io/react/">facebook react</a>, which is good at deal with events for display.</li>
+<li><a href="http://www.reactivemanifesto.org/">reactive manifesto</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
