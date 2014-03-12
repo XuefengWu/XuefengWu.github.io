@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: scala | To see a world in a grain of sand]]></title>
+  <link href="http://XuefengWu.github.io/blog/categories/scala/atom.xml" rel="self"/>
+  <link href="http://XuefengWu.github.io/"/>
+  <updated>2014-03-12T14:06:25+08:00</updated>
+  <id>http://XuefengWu.github.io/</id>
+  <author>
+    <name><![CDATA[Xuefeng Wu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Scala Guide Sessions]]></title>
+    <link href="http://XuefengWu.github.io/blog/2014/03/12/scala-guide-sessions/"/>
+    <updated>2014-03-12T13:49:00+08:00</updated>
+    <id>http://XuefengWu.github.io/blog/2014/03/12/scala-guide-sessions</id>
+    <content type="html"><![CDATA[<p>It is guide for scala quick learn sessions. All resource base on <a href="http://www.amazon.com/Scala-Impatient-Cay-S-Horstmann/dp/0321774094/ref=sr_1_1?ie=UTF8&amp;qid=1394603644&amp;sr=8-1&amp;keywords=scala">Scala for the Impatient</a></p>
+
+<h1>Day1: A better java</h1>
+
+<h2>1. The basic</h2>
+
+<p>play hello world &ndash; IDE</p>
+
+<p>Using the Scala interpreter</p>
+
+<p>Defining variables with var and val</p>
+
+<p>```
+val sum = 1 + 1
+sum = 5 //error</p>
+
+<p>var counter = 1
+counter = counter + 3
+```</p>
+
+<p>• Using operators and functions</p>
+
+<p>```
+counter.+=(3)</p>
+
+<p>1 to 3
+1.to(3)
+```</p>
+
+<p>• Navigating Scaladoc”</p>
+
+<h2>2. Control Structures and Functions</h2>
+
+<p>An if expression has a value.</p>
+
+<p><code>
+val sum = 2
+val counter = if(sum == 3) 1 else 2
+</code></p>
+
+<p>A block has a value—the value of its last expression.</p>
+
+<p><code>
+val total = {
+ val i = 2
+ i + 3
+}
+</code></p>
+
+<p>The Scala for loop is like an “enhanced” Java for loop.</p>
+
+<p>```
+for(i &lt;&ndash; 1 to 3) println(i)</p>
+
+<p>for (i &lt;&ndash; 1 to 3; j &lt;&ndash; 1 to 3 if i != j) print((10 * i + j) + &ldquo; &rdquo;)
+```</p>
+
+<p>Semicolons are (mostly) optional.</p>
+
+<p>The void type is Unit.
+<code>
+def hello(name: String): Unit = {
+ println("hello: "+name)
+}
+</code></p>
+
+<p>Avoid using return in a function.
+Beware of missing = in a function definition.
+<code>
+def hello(name: String) {
+ println("hello: "+name)
+}
+</code></p>
+
+<p>Exceptions work just like in Java or C++, but you use a “pattern matching” syntax for catch.
+Scala has no checked exceptions.
+```
+def safeSqrt(x:Int):Double = {
+  if (x >= 0) { Math.sqrt(x)
+  } else throw new IllegalArgumentException(&ldquo;x should not be negative&rdquo;)
+}</p>
+
+<p>try {
+  safeSqrt(-1)
+} catch {
+  case ex: IllegalArgumentException => println(ex)
+}
+```</p>
+
+<h2>3. Working with Arrays</h2>
+
+<p>Use an Array if the length is fixed, and an ArrayBuffer if the length can vary.
+```
+val nums = new Array<a href="10">Int</a></p>
+
+<p>import scala.collection.mutable.ArrayBuffer
+val b = ArrayBuffer<a href="">Int</a>
+b += 1
+b += (1, 2, 3, 5)
+b ++= Array(8, 13, 21)</p>
+
+<p>a filter { _ % 2 == 0 } map { 2 * _ }
+```</p>
+
+<ul>
+<li>Don’t use new when supplying initial values.</li>
+<li>Use () to access elements.</li>
+<li>Use for (elem &lt;&ndash; arr) to traverse the elements.</li>
+<li>Use for (elem &lt;&ndash; arr if &hellip; ) &hellip; yield &hellip; to transform into a new array.</li>
+</ul>
+
+
+<h2>4. Maps and Tuples</h2>
+
+<p>Scala has a pleasant syntax for creating, querying, and traversing maps.
+<code>
+val scores = Map("Alice" -&gt; 10, "Bob" -&gt; 3, "Cindy" -&gt; 8)
+"Alice" -&gt; 10  === ("Alice", 10)
+val bobsScore = scores("Bob")
+val bobsScore = scores.getOrElse("Bob", 0)
+scores("Bob") = 10
+“scores += ("Bob" -&gt; 10, "Fred" -&gt; 7)
+scores -= “Alice"
+“for ((k, v) &lt;- map) process k and v”
+</code></p>
+
+<p>You need to choose between mutable and immutable maps.</p>
+
+<p>By default, you get a hash map, but you can also get a tree map.</p>
+
+<p>Tuples are useful for aggregating values.
+<code>
+val t = (1, 3.14, "Fred")
+val second = t._2
+val (first, second, third) = t
+</code></p>
+
+<p>Fields in classes automatically come with getters and setters.
+<code>
+case class Person(name: String)
+val world =  Person("World")
+world.name
+</code></p>
+
+<p>You can replace a field with a custom getter/setter without changing the client of a class—that is the “uniform access principle.”</p>
+
+<p>Every class has a primary constructor that is “interwoven” with the class definition. Its parameters turn into the fields of the class. The primary constructor executes all statements in the body of the class.
+Auxiliary constructors are optional. They are called this.</p>
+
+<p>```
+class Person {</p>
+
+<p>  private var name = &ldquo;&rdquo;
+  private var age = 0
+  def this(name: String) {</p>
+
+<pre><code>this()
+this.name = name
+</code></pre>
+
+<p>  }
+  def this(name:String, age:Int){</p>
+
+<pre><code>this(name)
+this.age = age
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>new Person
+new Person(&ldquo;World&rdquo;)
+new Person(&ldquo;World&rdquo;,18)
+```</p>
+
+<h2>6. Objects</h2>
+
+<p>Use objects for singletons and utility methods.
+A class can have a companion object with the same name.
+The class and its companion object can access each other’s private features. They must be located in the same source file.
+```
+class Account {
+  val id = Account.newUniqueNumber()
+  private var balance = 0.0
+  def deposit(amount: Double) { balance += amount }</p>
+
+<p>}
+object Account { // The companion object
+  private var lastNumber = 0
+  private def newUniqueNumber() = { lastNumber += 1; lastNumber }
+}
+```</p>
+
+<p>Objects can extend classes or traits.
+<code>
+object Hello extends App {
+  println("Hello, World!")
+}
+</code></p>
+
+<p>The apply method of an object is usually used for constructing new instances of the companion cla
+```
+case class Account(private val id: Int,private val balance: Double)</p>
+
+<p>object Account { // The companion object
+  private var lastNumber = 0
+  private def newUniqueNumber() = { lastNumber += 1; lastNumber }
+  def apply(initialBalance: Double):Account =  {</p>
+
+<pre><code>Account(newUniqueNumber(), initialBalance)
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h2>7. Packages and Imports</h2>
+
+<p>Packages nest just like inner classes.
+Package paths are not absolute.
+A chain x.y.z in a package clause leaves the intermediate packages x and x.y invisible.”</p>
+
+<p>Package statements without braces at the top of the file extend to the entire file.
+A package object can hold functions and variables.
+• Import statements can import packages, classes, and objects.
+• Import statements can be anywhere.
+• Import statements can rename and hide members.
+• java.lang, scala, and Predef are always imported.
+<code>
+import java.lang._
+import scala._
+import Predef._
+</code></p>
+
+<h2>8. Inheritance</h2>
+
+<p>The extends and final keywords are as in Java.
+You must use override when you override a method.</p>
+
+<p>```
+case class Person(name:String)
+//Superclass Construction
+class Employee(name:String, salary:Double) extends Person(name) {
+  override def toString = getClass.getName + &ldquo;[name=&rdquo; + name + &ldquo;], Salary is [&rdquo; + salary +&ldquo;]&rdquo;
+}</p>
+
+<p>new Employee(&ldquo;World&rdquo;,0)</p>
+
+<p>//Type Checks and Casts
+val p:Person = new Employee(&ldquo;World&rdquo;,0)
+if (p.isInstanceOf[Employee]) {
+  val s = p.asInstanceOf[Employee] // s has type Employee
+}
+```</p>
+
+<p>Only the primary constructor can call the primary superclass constructor.</p>
+
+<p>You can override fields.
+```
+class Person(val name: String) {
+  override def toString = getClass.getName + &ldquo;[name=&rdquo; + name + &ldquo;]&rdquo;
+}</p>
+
+<p>class SecretAgent(codename: String) extends Person(codename) {
+  override val name = &ldquo;secret&rdquo; // Don&rsquo;t want to reveal name &hellip;
+  override val toString = &ldquo;secret&rdquo; // &hellip; or class name
+}
+```</p>
+
+<p>A def can only override another def.
+A val can only override another val or a parameterless def.
+A var can only override an abstract var (see Section 8.8, “Abstract Classes,” on page 91).”</p>
+
+<p>In Scala, the eq method of the AnyRef class checks whether two references refer to the same object. The equals method in AnyRef calls eq. When you implement a class, you should consider overriding the equals method to provide a natural notion of equality for your situation.”
+<code>
+class Person(name: String)
+val p1 = new Person("World")
+val p2 = new Person("World")
+p1 == p2
+</code></p>
+
+<p><em>case class</em>
+<code>
+case class Person(name: String)
+val p1 = Person("World")
+val p2 = Person("World")
+p1 == p2
+</code></p>
+
+<p>A class can implement any number of traits.
+Traits can require that implementing classes have certain fields, methods, or superclasses.
+Unlike Java interfaces, a Scala trait can provide implementations of methods and fields.
+When you layer multiple traits, the order matters—the trait whose methods execute first goes to the back.
+```
+trait Account {
+  var balance = 0.0
+}
+trait Logger {
+  def log(msg:String)
+}
+trait ConsoleLogger extends Logger {
+  def log(msg:String)=println(msg)
+}
+trait SavingsAccount extends Account with Logger {
+  def withdraw(amount: Double) {</p>
+
+<pre><code>if (amount &gt; balance) log("Insufficient funds")
+else balance -= amount
+</code></pre>
+
+<p>  }
+}
+val acct = new SavingsAccount with ConsoleLogger
+acct.withdraw(100)</p>
+
+<p>```</p>
+
+<p>Identifiers contain either alphanumeric or operator characters.
+Unary and binary operators are method calls.
+<code>
+(1 to 10) == 1.to(10)
+</code></p>
+
+<p>Operator precedence depends on the first character, associativity on the last.
+In Scala, all operators are left-associative except for
+• Operators that end in a colon (:)
+• Assignment operators
+<code>
+2 :: Nil === Nil.::(2)
+</code></p>
+
+<p><code>
+   //WARN: only for demo, be careful use this feature
+   class Foo() { def ++:(n:Int) = println(2*n) }
+   val foo = new Foo()
+   123 ++: foo
+</code></p>
+
+<p>The apply and update methods are called when evaluating expr(args).</p>
+
+<p>```
+object add {
+  private var <em>v = 1
+  def apply(v:Int):Unit = {println(</em>v + v)}
+  def update(name:String,v:Int):Unit = {println(&ldquo;Hello:&rdquo;+name+(_v + v))}
+}</p>
+
+<p>add(2)
+add(&ldquo;world&rdquo;) = 3
+```</p>
+
+<hr />
+
+<p>• Extractors extract tuples or sequences of values from an input”
+```
+object Number {
+  def unapply(input: String): Option[Int] =</p>
+
+<pre><code>try {
+  Some(Integer.parseInt(input.trim))
+} catch {
+  case ex: NumberFormatException =&gt; None
+}
+</code></pre>
+
+<p>}</p>
+
+<p>val Number(n) = &ldquo;1729&rdquo;
+```</p>
+
+<p>Day2: Functional and powerful collection</p>
+
+<h1>Chapter 12. Higher-Order Functions</h1>
+
+<p>Functions are “first-class citizens” in Scala, just like numbers.
+<code>
+import scala.math._
+val num = 3.14
+val fun = ceil _
+fun(num)
+</code>
+You can create anonymous functions, usually to give them to other functions.
+<code>
+(x: Double) =&gt; 3 * x
+val triple = (x: Double) =&gt; 3 * x
+def triple(x: Double) = 3 * x
+List(3.14, 1.42, 2.0).map((x: Double) =&gt; 3 * x)
+List(3.14, 1.42, 2.0).map((x) =&gt; 3 * x)
+List(3.14, 1.42, 2.0).map(x =&gt; 3 * x)
+List(3.14, 1.42, 2.0).map(3 * _)
+</code>
+A function argument specifies behavior that should be executed later.
+//function parameter: (parameterType) => resultType
+<code>
+def valueAtOneQuarter(f: (Double) =&gt; Double) = f(0.25)
+valueAtOneQuarter(Math.sqrt _)
+</code></p>
+
+<p>//((Double) => Double) => Double
+<code>
+def mulBy(factor : Double) = (x : Double) =&gt; factor * x
+val quintuple = mulBy(5)
+quintuple(20)
+</code></p>
+
+<p>Many collection methods take function parameters, applying a function to the values of the collection.
+<code>
+(1 to 9).map(v =&gt; v + 2)
+(1 to 9).reduceLeft(_ * _)
+(1 to 9).filter(_ % 2 == 0) // 2, 4, 6, 8
+"Mary had a little lamb".split(" ").sortWith(_.length &lt; _.length)
+</code>
+There are syntax shortcuts that allow you to express function parameters in a way that is short and easy to read.
+You can create functions that operate on blocks of code and look much like the built-in control statements.
+Closures
+<code>
+def mulBy(factor : Double) = (x : Double) =&gt; factor * x
+val triple = mulBy(3)
+val half = mulBy(0.5)
+println(triple(14) + " " + half(14))
+</code></p>
+
+<p>Currying
+<code>
+def mulBy(x: Double)(y: Double) = x * y
+val triple = mulBy(3)
+val half = mulBy(0.5)
+println(triple(14) + " " + half(14))
+</code></p>
+
+<p>Control Abstractions
+```
+def runInThread(block: () => Unit){
+  new Thread{</p>
+
+<pre><code>override def run() { block()}
+</code></pre>
+
+<p>  }.start()
+}
+runInThread { () => println(&ldquo;Hi&rdquo;); Thread.sleep(100); println(&ldquo;Bye&rdquo;) }
+Thread.sleep(1000)
+println(&ldquo;finished&rdquo;)
+```</p>
+
+<p>```
+def runInThread(block: => Unit){
+  new Thread{override def run(){block}}.start()
+}</p>
+
+<p>runInThread { println(&ldquo;Hi&rdquo;); Thread.sleep(10); println(&ldquo;Bye&rdquo;) }
+Thread.sleep(1000)
+println(&ldquo;finished&rdquo;)
+```</p>
+
+<h1>Chapter 13. Collections</h1>
+
+<p><a href="http://twitter.github.io/effectivescala/index-cn.html">http://twitter.github.io/effectivescala/index-cn.html</a></p>
+
+<pre><code>                Traversable
+                     |
+                     |
+                  Iterable
+                     |
+  +------------------+--------------------+
+ Map                Set                  Seq
+  |                  |                    |
+  |             +----+----+         +-----+------+
+Sorted Map  SortedSet   BitSet   Buffer Vector LinearSeq
+</code></pre>
+
+<p>```
+Traversable:
+def foreach<a href="f:%20A%20=>%20U">U</a>: Unit
+def map(f: A => B)
+def isEmpty: Boolean</p>
+
+<p>def takeWhile(p: A => Boolean)
+def dropWhile(p: A => Boolean)
+def span(p: A => Boolean)
+def splitAt(n: Int)</p>
+
+<p>def filterNot(p: A => Boolean)</p>
+
+<p>def filter(p: A => Boolean)
+def find<a href="p:%20A%20=>%20Boolean">A</a>:Option[A]</p>
+
+<p>def collect(pf: PartialFunction[A, B])
+//List(1,2,&ldquo;SS&rdquo;).collect{case i:Int => i}</p>
+
+<p>def partition(p: A => Boolean)
+def groupBy<a href="f:%20A%20=>%20K">K</a>: immutable.Map[K, Repr]</p>
+
+<p>def forall(p: A => Boolean): Boolean
+def exists(p: A => Boolean)</p>
+
+<p>def head: A
+def headOption: Option[A]
+def tail:
+def last: A
+def lastOption: Option[A]
+def init: Repr</p>
+
+<p>def take(n: Int)
+def drop(n: Int)</p>
+
+<p>def tails: Iterator[Repr]</p>
+
+<p>def view
+def flatMap<a href="f:%20A%20=>%20GenTraversableOnce[B]">B, That</a>
+```</p>
+
+<p>```
+def foldLeft<a href="z:%20B">B</a>(op: (B, A) => B)
+def reduceLeft<a href="op:%20(B,%20A">B >: A</a> => B)</p>
+
+<p>```
+Scala&rsquo;s collect is both filter and map, sorting out all the values
+which have a matching case clause and returning the value of the case
+clause in question.</p>
+
+<p>flatMap——结合了map 和 flatten —— 要特别小心，它有着难以琢磨的威力和强大的实用性</p>
+
+<p><code>
+val list = List(1,2,3,4,5)
+def g(v:Int) = List(v-1, v, v+1)
+list.map(x =&gt; g(x))
+list.flatMap(x =&gt; g(x))
+</code></p>
+
+<p>Day3: Pattern match and Type Parameters</p>
+
+<h1>Chapter 14. Pattern Matching and Case Classes</h1>
+
+<p>The match expression is a better switch, without fall-through.
+If no pattern matches, a MatchError is thrown. Use the case _ pattern to avoid that.
+A pattern can include an arbitrary condition, called a guard.</p>
+
+<p>```
+def choose(ch:Char) =
+  ch match {</p>
+
+<pre><code>case '+' =&gt; 1
+case '-' =&gt; -1
+case _ if Character.isDigit(ch) =&gt; Character.digit(ch, 10)
+//case _ =&gt; 0
+</code></pre>
+
+<p>  }
+choose(&lsquo;&ndash;&rsquo;)
+choose(&lsquo;9&rsquo;)
+choose(&lsquo;x&rsquo;)
+```</p>
+
+<p>You can match on the type of an expression; prefer this over isInstanceOf/asInstanceOf.</p>
+
+<p><code>
+def choose(obj:Any) =
+obj match {
+  case x: Int =&gt; x
+  case s: String =&gt; Integer.parseInt(s)
+  case _: BigInt =&gt; Int.MaxValue
+  case _ =&gt; 0
+}
+choose('2')
+choose(1)
+</code></p>
+
+<p>You can match patterns of arrays, tuples, and case classes, and bind parts of the pattern to variables.</p>
+
+<p>```
+def choose(arr:Seq[Int]) =
+arr match {
+  case Nil => &ldquo;0&rdquo;
+  case x :: y :: Nil => x + &ldquo; &rdquo; + y
+  case 0 :: xs => &ldquo;0 &hellip;&rdquo;
+  case _ => &ldquo;something else&rdquo;
+}
+choose(List())
+choose(List(1,3))
+choose(List(0))
+choose(List(0,1,2))
+choose(List(1,2,3))</p>
+
+<p>val pattern = &ldquo;([0-9]+) ([a-z]+)&rdquo;.r
+&ldquo;99 bottles&rdquo; match {
+  case pattern(num, item) => num
+}
+```</p>
+
+<p>In a for expression, nonmatches are silently skipped.
+<code>
+import scala.collection.JavaConversions.propertiesAsScalaMap
+// Converts Java Properties to a Scala map—just to get an interesting example
+for ((k, v) &lt;- System.getProperties())
+  println(k + " -&gt; " + v)
+</code></p>
+
+<p>A case class is a class for which the compiler automatically produces the methods that are needed for pattern matching.
+```
+trait Amount
+case class Dollar(value: Double) extends Amount
+case class Currency(value: Double, unit: String) extends Amount</p>
+
+<p>def choose(atm:Amount) =
+atm match {
+  case Dollar(v) => &ldquo;$&rdquo; + v
+  case Currency(_, u) => &ldquo;Oh noes, I got &rdquo; + u
+  case _ => &ldquo;&rdquo;
+}
+choose(Dollar(10))
+<code>
+An apply method is provided for the companion object that lets you construct objects without new, such as Dollar(29.95) or Currency(29.95, "EUR").
+An unapply method is provided that makes pattern matching work
+</code>
+object Number {
+  def unapply(input: String): Option[Int] =</p>
+
+<pre><code>try {
+  Some(Integer.parseInt(input.trim))
+} catch {
+  case ex: NumberFormatException =&gt; None
+}
+</code></pre>
+
+<p>}</p>
+
+<p>val Number(n) = &ldquo;1729&rdquo;</p>
+
+<p>case a Currency u => a
+case class ::<a href="head:%20B,%20tail:%20List[E]">E</a> extends List[E]
+lst match { case h :: t => &hellip; }  // Same as case ::(h, t), which calls ::.unapply(lst)
+result match { case p ~ q => &hellip; } // Same as case ~(p, q)
+```</p>
+
+<p>The common superclass in a case class hierarchy should be sealed.</p>
+
+<p>```
+sealed trait TrafficLightColor
+case object Red extends TrafficLightColor
+case object Yellow extends TrafficLightColor
+case object Green extends TrafficLightColor</p>
+
+<p>def choose(color: TrafficLightColor) =
+color match {
+  case Red => &ldquo;stop&rdquo;
+  case Yellow => &ldquo;hurry up&rdquo;
+  //case Green => &ldquo;go&rdquo;
+}
+```</p>
+
+<p>“A set of case clauses enclosed in braces is a partial function—a function which may not be defined for all inputs.”
+<code>
+val f: PartialFunction[Char, Int] = { case '+' =&gt; 1 ; case '-' =&gt; -1 }
+f('-') // Calls f.apply('-'), returns -1
+"-3+4".collect { case '+' =&gt; 1 ; case '-' =&gt; -1 } // Vector(-1, 1)
+f.isDefinedAt('0') // false
+f('0')
+</code></p>
+
+<h1>Chapter 17. Type Parameters</h1>
+
+<p>Classes, traits, methods, and functions can have type parameters.
+Place the type parameters after the name, enclosed in square brackets.
+```
+class Pair<a href="val%20first:%20T,%20val%20second:%20S">T, S</a> {</p>
+
+<pre><code>def hello:T = first
+</code></pre>
+
+<p>}
+def getMiddle<a href="a:%20Array[T]">T</a> = a(a.length / 2)
+```</p>
+
+<p>Type bounds have the form T &lt;: UpperBound, T >: LowerBound, T &lt;% ViewBound, T : ContextBound.
+```
+class Pair<a href="val%20first:%20T,%20val%20second:%20T">T</a> {
+  def smaller = if (first.compareTo(second) &lt; 0) first else second // Error
+}</p>
+
+<p>class Pair<a href="val%20first:%20T,%20val%20second:%20T">T &lt;: Comparable[T]</a> {
+  def smaller = if (first.compareTo(second) &lt; 0) first else second // Error
+  def replaceFirst<a href="newFirst:%20R">R >: T</a> = new Pair<a href="newFirst,%20second">R</a>
+}</p>
+
+<p>val p = new Pair(&ldquo;Fred&rdquo;, &ldquo;Brooks&rdquo;)
+println(p.smaller)
+```</p>
+
+<p>The &lt;% relation means that T can be converted to a Comparable[T] through an implicit conversion.
+<code>
+class Pair[T &lt;% Ordered[T]](val first: T, val second: T) {
+  def smaller = if (first &lt; second) first else second
+}
+new Pair(4, 2)
+</code></p>
+
+<p>```
+def makePair<a href="first:%20T,%20second:%20T">T : Manifest</a> = {
+  val r = new Array<a href="2">T</a>; r(0) = first; r(1) = second; r
+}
+makePair: <a href="first:%20T,%20second:%20T">T</a>(implicit evidence$1: Manifest[T])Unit</p>
+
+<p>makePair(4, 9)(intManifest) &ndash;> new Array(2)(intManifest)
+```</p>
+
+<p>• You can restrict a method with a type constraint such as (implicit ev: T &lt;:&lt; UpperBound).
+implicit evidence parameter</p>
+
+<p><code>
+class Pair[T](val first: T, val second: T)(implicit ev: T &lt;:&lt; Comparable[T])
+</code></p>
+
+<p><code>
+def firstLast[A, C &lt;: Iterable[A]](it: C) = (it.head, it.last)
+def firstLast[A, C](it: C)(implicit ev: C &lt;:&lt; Iterable[A]) = (it.head, it.last)
+</code></p>
+
+<p>Use +T (covariance) to indicate that a generic type’s subtype relationship is in the same direction as the parameter T, or -T (contravariance) to indicate the reverse direction.
+```</p>
+
+<p>class Pair<a href="val%20first:%20T,%20val%20second:%20T">+T</a>
+```
+The + means that the type is covariant in T—that is, it varies in the same direction.
+Since Student is a subtype of Person, a Pair[Student] is now a subtype of Pair[Person].</p>
+
+<p>• Covariance is appropriate for parameters that denote outputs, such as elements in an immutable collection.
+• Contravariance is appropriate for parameters that denote inputs, such as function arguments.”</p>
+]]></content>
+  </entry>
+  
+</feed>

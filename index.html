@@ -9,7 +9,7 @@
   <meta name="author" content="Xuefeng Wu">
 
   
-  <meta name="description" content="Stream Programming The world with time is continuative, but right now we programming in a static world with status. How to process events in realtime &hellip;">
+  <meta name="description" content="It is guide for scala quick learn sessions. All resource base on Scala for the Impatient Day1: A better java 1. The basic play hello world &ndash; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,1112 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/12/scala-guide-sessions/">Scala Guide Sessions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-12T13:49:00+08:00" pubdate data-updated="true">Mar 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It is guide for scala quick learn sessions. All resource base on <a href="http://www.amazon.com/Scala-Impatient-Cay-S-Horstmann/dp/0321774094/ref=sr_1_1?ie=UTF8&amp;qid=1394603644&amp;sr=8-1&amp;keywords=scala">Scala for the Impatient</a></p>
+
+<h1>Day1: A better java</h1>
+
+<h2>1. The basic</h2>
+
+<p>play hello world &ndash; IDE</p>
+
+<p>Using the Scala interpreter</p>
+
+<p>Defining variables with var and val</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>val sum = 1 + 1
+</span><span class='line'>sum = 5 //error
+</span><span class='line'>
+</span><span class='line'>var counter = 1
+</span><span class='line'>counter = counter + 3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>• Using operators and functions</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>counter.+=(3)
+</span><span class='line'>
+</span><span class='line'>1 to 3
+</span><span class='line'>1.to(3)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>• Navigating Scaladoc”</p>
+
+<h2>2. Control Structures and Functions</h2>
+
+<p>An if expression has a value.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>val sum = 2
+</span><span class='line'>val counter = if(sum == 3) 1 else 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A block has a value—the value of its last expression.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>val total = {
+</span><span class='line'> val i = 2
+</span><span class='line'> i + 3
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The Scala for loop is like an “enhanced” Java for loop.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for(i &lt;- 1 to 3) println(i)
+</span><span class='line'>
+</span><span class='line'>for (i &lt;- 1 to 3; j &lt;- 1 to 3 if i != j) print((10 * i + j) + " ")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Semicolons are (mostly) optional.</p>
+
+<p>The void type is Unit.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def hello(name: String): Unit = {
+</span><span class='line'> println("hello: "+name)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Avoid using return in a function.
+Beware of missing = in a function definition.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def hello(name: String) {
+</span><span class='line'> println("hello: "+name)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Exceptions work just like in Java or C++, but you use a “pattern matching” syntax for catch.
+Scala has no checked exceptions.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def safeSqrt(x:Int):Double = {
+</span><span class='line'>  if (x &gt;= 0) { Math.sqrt(x)
+</span><span class='line'>  } else throw new IllegalArgumentException("x should not be negative")
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>try {
+</span><span class='line'>  safeSqrt(-1)
+</span><span class='line'>} catch {
+</span><span class='line'>  case ex: IllegalArgumentException =&gt; println(ex)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Working with Arrays</h2>
+
+<p>Use an Array if the length is fixed, and an ArrayBuffer if the length can vary.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>val nums = new Array[Int](10)
+</span><span class='line'>
+</span><span class='line'>import scala.collection.mutable.ArrayBuffer
+</span><span class='line'>val b = ArrayBuffer[Int]()
+</span><span class='line'>b += 1
+</span><span class='line'>b += (1, 2, 3, 5)
+</span><span class='line'>b ++= Array(8, 13, 21)
+</span><span class='line'>
+</span><span class='line'>a filter { _ % 2 == 0 } map { 2 * _ }</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Don’t use new when supplying initial values.</li>
+<li>Use () to access elements.</li>
+<li>Use for (elem &lt;&ndash; arr) to traverse the elements.</li>
+<li>Use for (elem &lt;&ndash; arr if &hellip; ) &hellip; yield &hellip; to transform into a new array.</li>
+</ul>
+
+
+<h2>4. Maps and Tuples</h2>
+
+<p>Scala has a pleasant syntax for creating, querying, and traversing maps.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>val scores = Map("Alice" -&gt; 10, "Bob" -&gt; 3, "Cindy" -&gt; 8)
+</span><span class='line'>"Alice" -&gt; 10  === ("Alice", 10)
+</span><span class='line'>val bobsScore = scores("Bob")
+</span><span class='line'>val bobsScore = scores.getOrElse("Bob", 0)
+</span><span class='line'>scores("Bob") = 10
+</span><span class='line'>“scores += ("Bob" -&gt; 10, "Fred" -&gt; 7)
+</span><span class='line'>scores -= “Alice"
+</span><span class='line'>“for ((k, v) &lt;- map) process k and v”</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You need to choose between mutable and immutable maps.</p>
+
+<p>By default, you get a hash map, but you can also get a tree map.</p>
+
+<p>Tuples are useful for aggregating values.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>val t = (1, 3.14, "Fred")
+</span><span class='line'>val second = t._2
+</span><span class='line'>val (first, second, third) = t</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fields in classes automatically come with getters and setters.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>case class Person(name: String)
+</span><span class='line'>val world =  Person("World")
+</span><span class='line'>world.name</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can replace a field with a custom getter/setter without changing the client of a class—that is the “uniform access principle.”</p>
+
+<p>Every class has a primary constructor that is “interwoven” with the class definition. Its parameters turn into the fields of the class. The primary constructor executes all statements in the body of the class.
+Auxiliary constructors are optional. They are called this.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Person {
+</span><span class='line'>
+</span><span class='line'>  private var name = ""
+</span><span class='line'>  private var age = 0
+</span><span class='line'>  def this(name: String) {
+</span><span class='line'>    this()
+</span><span class='line'>    this.name = name
+</span><span class='line'>  }
+</span><span class='line'>  def this(name:String, age:Int){
+</span><span class='line'>    this(name)
+</span><span class='line'>    this.age = age
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>new Person
+</span><span class='line'>new Person("World")
+</span><span class='line'>new Person("World",18)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>6. Objects</h2>
+
+<p>Use objects for singletons and utility methods.
+A class can have a companion object with the same name.
+The class and its companion object can access each other’s private features. They must be located in the same source file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Account {
+</span><span class='line'>  val id = Account.newUniqueNumber()
+</span><span class='line'>  private var balance = 0.0
+</span><span class='line'>  def deposit(amount: Double) { balance += amount }
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>object Account { // The companion object
+</span><span class='line'>  private var lastNumber = 0
+</span><span class='line'>  private def newUniqueNumber() = { lastNumber += 1; lastNumber }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Objects can extend classes or traits.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>object Hello extends App {
+</span><span class='line'>  println("Hello, World!")
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The apply method of an object is usually used for constructing new instances of the companion cla</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>case class Account(private val id: Int,private val balance: Double)
+</span><span class='line'>
+</span><span class='line'>object Account { // The companion object
+</span><span class='line'>  private var lastNumber = 0
+</span><span class='line'>  private def newUniqueNumber() = { lastNumber += 1; lastNumber }
+</span><span class='line'>  def apply(initialBalance: Double):Account =  {
+</span><span class='line'>    Account(newUniqueNumber(), initialBalance)
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>7. Packages and Imports</h2>
+
+<p>Packages nest just like inner classes.
+Package paths are not absolute.
+A chain x.y.z in a package clause leaves the intermediate packages x and x.y invisible.”</p>
+
+<p>Package statements without braces at the top of the file extend to the entire file.
+A package object can hold functions and variables.
+• Import statements can import packages, classes, and objects.
+• Import statements can be anywhere.
+• Import statements can rename and hide members.
+• java.lang, scala, and Predef are always imported.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import java.lang._
+</span><span class='line'>import scala._
+</span><span class='line'>import Predef._</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>8. Inheritance</h2>
+
+<p>The extends and final keywords are as in Java.
+You must use override when you override a method.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>case class Person(name:String)
+</span><span class='line'>//Superclass Construction
+</span><span class='line'>class Employee(name:String, salary:Double) extends Person(name) {
+</span><span class='line'>  override def toString = getClass.getName + "[name=" + name + "], Salary is [" + salary +"]"
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>new Employee("World",0)
+</span><span class='line'>
+</span><span class='line'>//Type Checks and Casts
+</span><span class='line'>val p:Person = new Employee("World",0)
+</span><span class='line'>if (p.isInstanceOf[Employee]) {
+</span><span class='line'>  val s = p.asInstanceOf[Employee] // s has type Employee
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Only the primary constructor can call the primary superclass constructor.</p>
+
+<p>You can override fields.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Person(val name: String) {
+</span><span class='line'>  override def toString = getClass.getName + "[name=" + name + "]"
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class SecretAgent(codename: String) extends Person(codename) {
+</span><span class='line'>  override val name = "secret" // Don't want to reveal name . . .
+</span><span class='line'>  override val toString = "secret" // . . . or class name
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A def can only override another def.
+A val can only override another val or a parameterless def.
+A var can only override an abstract var (see Section 8.8, “Abstract Classes,” on page 91).”</p>
+
+<p>In Scala, the eq method of the AnyRef class checks whether two references refer to the same object. The equals method in AnyRef calls eq. When you implement a class, you should consider overriding the equals method to provide a natural notion of equality for your situation.”</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Person(name: String)
+</span><span class='line'>val p1 = new Person("World")
+</span><span class='line'>val p2 = new Person("World")
+</span><span class='line'>p1 == p2</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>case class</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>case class Person(name: String)
+</span><span class='line'>val p1 = Person("World")
+</span><span class='line'>val p2 = Person("World")
+</span><span class='line'>p1 == p2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A class can implement any number of traits.
+Traits can require that implementing classes have certain fields, methods, or superclasses.
+Unlike Java interfaces, a Scala trait can provide implementations of methods and fields.
+When you layer multiple traits, the order matters—the trait whose methods execute first goes to the back.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>trait Account {
+</span><span class='line'>  var balance = 0.0
+</span><span class='line'>}
+</span><span class='line'>trait Logger {
+</span><span class='line'>  def log(msg:String)
+</span><span class='line'>}
+</span><span class='line'>trait ConsoleLogger extends Logger {
+</span><span class='line'>  def log(msg:String)=println(msg)
+</span><span class='line'>}
+</span><span class='line'>trait SavingsAccount extends Account with Logger {
+</span><span class='line'>  def withdraw(amount: Double) {
+</span><span class='line'>    if (amount &gt; balance) log("Insufficient funds")
+</span><span class='line'>    else balance -= amount
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>val acct = new SavingsAccount with ConsoleLogger
+</span><span class='line'>acct.withdraw(100)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Identifiers contain either alphanumeric or operator characters.
+Unary and binary operators are method calls.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(1 to 10) == 1.to(10)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Operator precedence depends on the first character, associativity on the last.
+In Scala, all operators are left-associative except for
+• Operators that end in a colon (:)
+• Assignment operators</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2 :: Nil === Nil.::(2)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   //WARN: only for demo, be careful use this feature
+</span><span class='line'>   class Foo() { def ++:(n:Int) = println(2*n) }
+</span><span class='line'>   val foo = new Foo()
+</span><span class='line'>   123 ++: foo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The apply and update methods are called when evaluating expr(args).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>object add {
+</span><span class='line'>  private var _v = 1
+</span><span class='line'>  def apply(v:Int):Unit = {println(_v + v)}
+</span><span class='line'>  def update(name:String,v:Int):Unit = {println("Hello:"+name+(_v + v))}
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>add(2)
+</span><span class='line'>add("world") = 3</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>• Extractors extract tuples or sequences of values from an input”</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>object Number {
+</span><span class='line'>  def unapply(input: String): Option[Int] =
+</span><span class='line'>    try {
+</span><span class='line'>      Some(Integer.parseInt(input.trim))
+</span><span class='line'>    } catch {
+</span><span class='line'>      case ex: NumberFormatException =&gt; None
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>val Number(n) = "1729"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Day2: Functional and powerful collection</p>
+
+<h1>Chapter 12. Higher-Order Functions</h1>
+
+<p>Functions are “first-class citizens” in Scala, just like numbers.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import scala.math._
+</span><span class='line'>val num = 3.14
+</span><span class='line'>val fun = ceil _
+</span><span class='line'>fun(num)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can create anonymous functions, usually to give them to other functions.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(x: Double) =&gt; 3 * x
+</span><span class='line'>val triple = (x: Double) =&gt; 3 * x
+</span><span class='line'>def triple(x: Double) = 3 * x
+</span><span class='line'>List(3.14, 1.42, 2.0).map((x: Double) =&gt; 3 * x)
+</span><span class='line'>List(3.14, 1.42, 2.0).map((x) =&gt; 3 * x)
+</span><span class='line'>List(3.14, 1.42, 2.0).map(x =&gt; 3 * x)
+</span><span class='line'>List(3.14, 1.42, 2.0).map(3 * _)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A function argument specifies behavior that should be executed later.
+//function parameter: (parameterType) => resultType</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def valueAtOneQuarter(f: (Double) =&gt; Double) = f(0.25)
+</span><span class='line'>valueAtOneQuarter(Math.sqrt _)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>//((Double) => Double) => Double</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def mulBy(factor : Double) = (x : Double) =&gt; factor * x
+</span><span class='line'>val quintuple = mulBy(5)
+</span><span class='line'>quintuple(20)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Many collection methods take function parameters, applying a function to the values of the collection.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(1 to 9).map(v =&gt; v + 2)
+</span><span class='line'>(1 to 9).reduceLeft(_ * _)
+</span><span class='line'>(1 to 9).filter(_ % 2 == 0) // 2, 4, 6, 8
+</span><span class='line'>"Mary had a little lamb".split(" ").sortWith(_.length &lt; _.length)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are syntax shortcuts that allow you to express function parameters in a way that is short and easy to read.
+You can create functions that operate on blocks of code and look much like the built-in control statements.
+Closures</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def mulBy(factor : Double) = (x : Double) =&gt; factor * x
+</span><span class='line'>val triple = mulBy(3)
+</span><span class='line'>val half = mulBy(0.5)
+</span><span class='line'>println(triple(14) + " " + half(14))</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Currying</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def mulBy(x: Double)(y: Double) = x * y
+</span><span class='line'>val triple = mulBy(3)
+</span><span class='line'>val half = mulBy(0.5)
+</span><span class='line'>println(triple(14) + " " + half(14))</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Control Abstractions</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def runInThread(block: () =&gt; Unit){
+</span><span class='line'>  new Thread{
+</span><span class='line'>    override def run() { block()}
+</span><span class='line'>  }.start()
+</span><span class='line'>}
+</span><span class='line'>runInThread { () =&gt; println("Hi"); Thread.sleep(100); println("Bye") }
+</span><span class='line'>Thread.sleep(1000)
+</span><span class='line'>println("finished")</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def runInThread(block: =&gt; Unit){
+</span><span class='line'>  new Thread{override def run(){block}}.start()
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>runInThread { println("Hi"); Thread.sleep(10); println("Bye") }
+</span><span class='line'>Thread.sleep(1000)
+</span><span class='line'>println("finished")</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Chapter 13. Collections</h1>
+
+<p><a href="http://twitter.github.io/effectivescala/index-cn.html">http://twitter.github.io/effectivescala/index-cn.html</a></p>
+
+<pre><code>                Traversable
+                     |
+                     |
+                  Iterable
+                     |
+  +------------------+--------------------+
+ Map                Set                  Seq
+  |                  |                    |
+  |             +----+----+         +-----+------+
+Sorted Map  SortedSet   BitSet   Buffer Vector LinearSeq
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Traversable:
+</span><span class='line'>def foreach[U](f: A =&gt; U): Unit
+</span><span class='line'>def map(f: A =&gt; B)
+</span><span class='line'>def isEmpty: Boolean
+</span><span class='line'>
+</span><span class='line'>def takeWhile(p: A =&gt; Boolean)
+</span><span class='line'>def dropWhile(p: A =&gt; Boolean)
+</span><span class='line'>def span(p: A =&gt; Boolean)
+</span><span class='line'>def splitAt(n: Int)
+</span><span class='line'>
+</span><span class='line'>def filterNot(p: A =&gt; Boolean)
+</span><span class='line'>
+</span><span class='line'>def filter(p: A =&gt; Boolean)
+</span><span class='line'>def find[A](p: A =&gt; Boolean):Option[A]
+</span><span class='line'>
+</span><span class='line'>def collect(pf: PartialFunction[A, B])
+</span><span class='line'>//List(1,2,"SS").collect{case i:Int =&gt; i}
+</span><span class='line'>
+</span><span class='line'>def partition(p: A =&gt; Boolean)
+</span><span class='line'>def groupBy[K](f: A =&gt; K): immutable.Map[K, Repr]
+</span><span class='line'>
+</span><span class='line'>def forall(p: A =&gt; Boolean): Boolean
+</span><span class='line'>def exists(p: A =&gt; Boolean)
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>def head: A
+</span><span class='line'>def headOption: Option[A]
+</span><span class='line'>def tail:
+</span><span class='line'>def last: A
+</span><span class='line'>def lastOption: Option[A]
+</span><span class='line'>def init: Repr
+</span><span class='line'>
+</span><span class='line'>def take(n: Int)
+</span><span class='line'>def drop(n: Int)
+</span><span class='line'>
+</span><span class='line'>def tails: Iterator[Repr]
+</span><span class='line'>
+</span><span class='line'>def view
+</span><span class='line'>def flatMap[B, That](f: A =&gt; GenTraversableOnce[B])</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def foldLeft[B](z: B)(op: (B, A) =&gt; B)
+</span><span class='line'>def reduceLeft[B &gt;: A](op: (B, A) =&gt; B)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Scala&rsquo;s collect is both filter and map, sorting out all the values
+which have a matching case clause and returning the value of the case
+clause in question.</p>
+
+<p>flatMap——结合了map 和 flatten —— 要特别小心，它有着难以琢磨的威力和强大的实用性</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>val list = List(1,2,3,4,5)
+</span><span class='line'>def g(v:Int) = List(v-1, v, v+1)
+</span><span class='line'>list.map(x =&gt; g(x))
+</span><span class='line'>list.flatMap(x =&gt; g(x))</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Day3: Pattern match and Type Parameters</p>
+
+<h1>Chapter 14. Pattern Matching and Case Classes</h1>
+
+<p>The match expression is a better switch, without fall-through.
+If no pattern matches, a MatchError is thrown. Use the case _ pattern to avoid that.
+A pattern can include an arbitrary condition, called a guard.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def choose(ch:Char) =
+</span><span class='line'>  ch match {
+</span><span class='line'>    case '+' =&gt; 1
+</span><span class='line'>    case '-' =&gt; -1
+</span><span class='line'>    case _ if Character.isDigit(ch) =&gt; Character.digit(ch, 10)
+</span><span class='line'>    //case _ =&gt; 0
+</span><span class='line'>  }
+</span><span class='line'>choose('-')
+</span><span class='line'>choose('9')
+</span><span class='line'>choose('x')</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can match on the type of an expression; prefer this over isInstanceOf/asInstanceOf.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def choose(obj:Any) =
+</span><span class='line'>obj match {
+</span><span class='line'>  case x: Int =&gt; x
+</span><span class='line'>  case s: String =&gt; Integer.parseInt(s)
+</span><span class='line'>  case _: BigInt =&gt; Int.MaxValue
+</span><span class='line'>  case _ =&gt; 0
+</span><span class='line'>}
+</span><span class='line'>choose('2')
+</span><span class='line'>choose(1)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can match patterns of arrays, tuples, and case classes, and bind parts of the pattern to variables.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def choose(arr:Seq[Int]) =
+</span><span class='line'>arr match {
+</span><span class='line'>  case Nil =&gt; "0"
+</span><span class='line'>  case x :: y :: Nil =&gt; x + " " + y
+</span><span class='line'>  case 0 :: xs =&gt; "0 ..."
+</span><span class='line'>  case _ =&gt; "something else"
+</span><span class='line'>}
+</span><span class='line'>choose(List())
+</span><span class='line'>choose(List(1,3))
+</span><span class='line'>choose(List(0))
+</span><span class='line'>choose(List(0,1,2))
+</span><span class='line'>choose(List(1,2,3))
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>val pattern = "([0-9]+) ([a-z]+)".r
+</span><span class='line'>"99 bottles" match {
+</span><span class='line'>  case pattern(num, item) =&gt; num
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In a for expression, nonmatches are silently skipped.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import scala.collection.JavaConversions.propertiesAsScalaMap
+</span><span class='line'>// Converts Java Properties to a Scala map—just to get an interesting example
+</span><span class='line'>for ((k, v) &lt;- System.getProperties())
+</span><span class='line'>  println(k + " -&gt; " + v)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A case class is a class for which the compiler automatically produces the methods that are needed for pattern matching.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>trait Amount
+</span><span class='line'>case class Dollar(value: Double) extends Amount
+</span><span class='line'>case class Currency(value: Double, unit: String) extends Amount
+</span><span class='line'>
+</span><span class='line'>def choose(atm:Amount) =
+</span><span class='line'>atm match {
+</span><span class='line'>  case Dollar(v) =&gt; "$" + v
+</span><span class='line'>  case Currency(_, u) =&gt; "Oh noes, I got " + u
+</span><span class='line'>  case _ =&gt; ""
+</span><span class='line'>}
+</span><span class='line'>choose(Dollar(10))</span></code></pre></td></tr></table></div></figure>
+
+
+<p>An apply method is provided for the companion object that lets you construct objects without new, such as Dollar(29.95) or Currency(29.95, &ldquo;EUR&rdquo;).
+An unapply method is provided that makes pattern matching work</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>object Number {
+</span><span class='line'>  def unapply(input: String): Option[Int] =
+</span><span class='line'>    try {
+</span><span class='line'>      Some(Integer.parseInt(input.trim))
+</span><span class='line'>    } catch {
+</span><span class='line'>      case ex: NumberFormatException =&gt; None
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>val Number(n) = "1729"
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>case a Currency u =&gt; a
+</span><span class='line'>case class ::[E](head: B, tail: List[E]) extends List[E]
+</span><span class='line'>lst match { case h :: t =&gt; ... }  // Same as case ::(h, t), which calls ::.unapply(lst)
+</span><span class='line'>result match { case p ~ q =&gt; ... } // Same as case ~(p, q)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The common superclass in a case class hierarchy should be sealed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sealed trait TrafficLightColor
+</span><span class='line'>case object Red extends TrafficLightColor
+</span><span class='line'>case object Yellow extends TrafficLightColor
+</span><span class='line'>case object Green extends TrafficLightColor
+</span><span class='line'>
+</span><span class='line'>def choose(color: TrafficLightColor) =
+</span><span class='line'>color match {
+</span><span class='line'>  case Red =&gt; "stop"
+</span><span class='line'>  case Yellow =&gt; "hurry up"
+</span><span class='line'>  //case Green =&gt; "go"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>“A set of case clauses enclosed in braces is a partial function—a function which may not be defined for all inputs.”</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>val f: PartialFunction[Char, Int] = { case '+' =&gt; 1 ; case '-' =&gt; -1 }
+</span><span class='line'>f('-') // Calls f.apply('-'), returns -1
+</span><span class='line'>"-3+4".collect { case '+' =&gt; 1 ; case '-' =&gt; -1 } // Vector(-1, 1)
+</span><span class='line'>f.isDefinedAt('0') // false
+</span><span class='line'>f('0')</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Chapter 17. Type Parameters</h1>
+
+<p>Classes, traits, methods, and functions can have type parameters.
+Place the type parameters after the name, enclosed in square brackets.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Pair[T, S](val first: T, val second: S) {
+</span><span class='line'>    def hello:T = first
+</span><span class='line'>}
+</span><span class='line'>def getMiddle[T](a: Array[T]) = a(a.length / 2)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Type bounds have the form T &lt;: UpperBound, T >: LowerBound, T &lt;% ViewBound, T : ContextBound.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Pair[T](val first: T, val second: T) {
+</span><span class='line'>  def smaller = if (first.compareTo(second) &lt; 0) first else second // Error
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class Pair[T &lt;: Comparable[T]](val first: T, val second: T) {
+</span><span class='line'>  def smaller = if (first.compareTo(second) &lt; 0) first else second // Error
+</span><span class='line'>  def replaceFirst[R &gt;: T](newFirst: R) = new Pair[R](newFirst, second)
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>val p = new Pair("Fred", "Brooks")
+</span><span class='line'>println(p.smaller)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The &lt;% relation means that T can be converted to a Comparable[T] through an implicit conversion.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Pair[T &lt;% Ordered[T]](val first: T, val second: T) {
+</span><span class='line'>  def smaller = if (first &lt; second) first else second
+</span><span class='line'>}
+</span><span class='line'>new Pair(4, 2)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def makePair[T : Manifest](first: T, second: T) = {
+</span><span class='line'>  val r = new Array[T](2); r(0) = first; r(1) = second; r
+</span><span class='line'>}
+</span><span class='line'>makePair: [T](first: T, second: T)(implicit evidence$1: Manifest[T])Unit
+</span><span class='line'>
+</span><span class='line'>makePair(4, 9)(intManifest) -&gt; new Array(2)(intManifest)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>• You can restrict a method with a type constraint such as (implicit ev: T &lt;:&lt; UpperBound).
+implicit evidence parameter</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Pair[T](val first: T, val second: T)(implicit ev: T &lt;:&lt; Comparable[T])</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def firstLast[A, C &lt;: Iterable[A]](it: C) = (it.head, it.last)
+</span><span class='line'>def firstLast[A, C](it: C)(implicit ev: C &lt;:&lt; Iterable[A]) = (it.head, it.last)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Use +T (covariance) to indicate that a generic type’s subtype relationship is in the same direction as the parameter T, or -T (contravariance) to indicate the reverse direction.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>class Pair[+T](val first: T, val second: T)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The + means that the type is covariant in T—that is, it varies in the same direction.
+Since Student is a subtype of Person, a Pair[Student] is now a subtype of Pair[Person].</p>
+
+<p>• Covariance is appropriate for parameters that denote outputs, such as elements in an immutable collection.
+• Contravariance is appropriate for parameters that denote inputs, such as function arguments.”</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -246,6 +1352,10 @@ And display the realtime usage in page.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/12/scala-guide-sessions/">Scala Guide Sessions</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/01/22/web-stream-programming/">Web Stream Programming</a>
